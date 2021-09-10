@@ -29,7 +29,7 @@ runs:
       shell: bash
       run: |
         ARGS="${{ inputs.test-args }}"
-        if [ "${{ inputs.skip-build }}" == "true" ]
+        if [ "${{ inputs.skip-build }}" == "true" ] ; then
           ARGS="${ARGS} --no-build"
         fi
         dotnet test "${{ inputs.path }}" -c "${{ inputs.build-configuration }}" ${ARGS}
