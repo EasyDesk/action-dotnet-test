@@ -32,4 +32,4 @@ runs:
         if [ "${{ inputs.skip-build }}" == "true" ]
           ARGS="${ARGS} --no-build"
         fi
-        dotnet test "${{ inputs.path }}" -c "${{ inputs.build-configuration }}" --no-build ${ARGS}
+        dotnet test "${{ inputs.path }}" -c "${{ inputs.build-configuration }}" ${ARGS}
