@@ -1,0 +1,35 @@
+name: Dotnet Test
+description: Runs a test project or all test projects in a solution
+
+branding:
+  color: green
+  icon: check-circle
+
+inputs:
+  test-args:
+    description: Additional arguments to pass to 'dotnet test'.
+    required: false
+  build-configuration:
+    description: The build configuration to use (defaults to 'Release').
+    required: false
+    default: Release
+  path:
+    description: The path to the project or solution to test (defaults to the current directory).
+    required: false
+    default: .
+  skip-build:
+    description: Whether or not to skip the build using the '--no-build' flag (defaults to true).
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - name: Run tests
+      shell: bash
+      run: |
+        ARGS="${{ inputs.test-args }}"
+        if [ "${{ inputs.skip-build }}" == "true" ]
+          ARGS="${ARGS} --no-build"
+        fi
+        dotnet test "${{ inputs.path }}" -c "${{ inputs.build-configuration }}" --no-build ${ARGS}
