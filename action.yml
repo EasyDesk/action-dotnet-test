@@ -1,4 +1,4 @@
-name: Dotnet Test
+name: Dotnet Tests
 description: Runs a test project or all test projects in a solution
 
 branding:
