@@ -24,6 +24,10 @@ inputs:
 
 runs:
   using: composite
+  env:
+    DOTNET_NOLOGO: true
+    DOTNET_CLI_TELEMETRY_OPTOUT: true
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   steps:
     - name: Run tests
       shell: bash
