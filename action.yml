@@ -21,10 +21,6 @@ inputs:
     description: Whether or not to skip the build using the '--no-build' flag (defaults to true).
     required: false
     default: 'true'
-  display-summary:
-    description: Whether or not to display the tests summary (defaults to true) in the job summary.
-    required: false
-    default: 'true'
 
 runs:
   using: composite
@@ -36,8 +32,5 @@ runs:
           ARGS=""
           if [ '${{ inputs.skip-build }}' == "true" ] ; then
             ARGS="${ARGS} --no-build"
-          fi
-          if [ '${{ inputs.display-summary }}' == "true" ] ; then
-            ARGS="${ARGS} --logger 'GitHubActions;report-warnings=false'"
           fi
           dotnet test '${{ inputs.path }}' -c '${{ inputs.build-configuration }}' ${{ inputs.test-args }} ${ARGS}
