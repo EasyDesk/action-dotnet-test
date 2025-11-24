@@ -16,12 +16,6 @@ inputs:
   path:
     description: The path to the project or solution to test (defaults to the current directory).
     required: false
-  solution:
-    description: The solution file to test (defaults to the current directory).
-    required: false
-  project:
-    description: The project file to test (defaults to the current directory).
-    required: false
   skip-build:
     description: Whether or not to skip the build using the '--no-build' flag (defaults to true).
     required: false
@@ -38,14 +32,4 @@ runs:
           if [ '${{ inputs.skip-build }}' == "true" ] ; then
             ARGS="${ARGS} --no-build"
           fi
-          if [ -n '${{ inputs.solution }}' ] ; then
-            ARGS="${ARGS} --solution '${{ inputs.solution }}'"
-          fi
-          if [ -n '${{ inputs.project }}' ] ; then
-            ARGS="${ARGS} --project '${{ inputs.project }}'"
-          fi
-          PATH_ARG=""
-          if [ -n '${{ inputs.path }}' ] ; then
-            PATH_ARG="${{ inputs.path }}"
-          fi
-          dotnet test "${PATH_ARG}" -c '${{ inputs.build-configuration }}' ${ARGS} ${{ inputs.test-args }}
+          dotnet test '${{inputs.path}}' -c '${{ inputs.build-configuration }}' ${ARGS} ${{ inputs.test-args }}
