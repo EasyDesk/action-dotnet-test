@@ -13,9 +13,6 @@ inputs:
     description: The build configuration to use (defaults to 'Release').
     required: false
     default: Release
-  path:
-    description: The path to the project or solution to test (defaults to the current directory).
-    required: false
   skip-build:
     description: Whether or not to skip the build using the '--no-build' flag (defaults to true).
     required: false
@@ -32,4 +29,4 @@ runs:
           if [ '${{ inputs.skip-build }}' == "true" ] ; then
             ARGS="${ARGS} --no-build"
           fi
-          dotnet test '${{inputs.path}}' -c '${{ inputs.build-configuration }}' ${ARGS} ${{ inputs.test-args }}
+          dotnet test -c '${{ inputs.build-configuration }}' ${ARGS} ${{ inputs.test-args }}
